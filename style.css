@@ -90,3 +90,24 @@ button:hover { transform: translateY(-2px); filter: brightness(1.04); }
   .message-card { padding: 20px; }
   .birthday-screen { padding-top: 35px; }
 }
+
+.confetti {
+  position: fixed;
+  top: -15px;
+  width: 9px;
+  height: 16px;
+  z-index: 20;
+  border-radius: 2px;
+  animation: confetti-fall 3.5s linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
