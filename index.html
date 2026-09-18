@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>С днём рождения!</title>
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+  <main>
+    <section class="lock-screen" id="lockScreen">
+      <div class="sparkle sparkle-one">✦</div>
+      <div class="sparkle sparkle-two">✧</div>
+      <div class="lock-card">
+        <div class="gift">🎁</div>
+        <p class="eyebrow">маленький сюрприз</p>
+        <h1>Введите секретную дату своего рождения через точки</h1>
+        <form id="dateForm">
+          <label for="dateInput">Дата</label>
+          <input id="dateInput" type="text" placeholder="ДД.ММ.ГГ" maxlength="10" autocomplete="off" />
+          <button type="submit">Открыть поздравление</button>
+          <p class="error" id="errorMessage" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="birthday-screen hidden" id="birthdayScreen">
+      <div class="confetti" aria-hidden="true">✦ · ✧ · ✦ · ✧ · ✦</div>
+      <p class="eyebrow">сегодня особенный день</p>
+      <h1>С днём рождения!</h1>
+      <p class="subtitle">Пусть каждый день будет наполнен теплом, радостью и улыбками</p>
+
+      <div class="photo-frame">
+        <img src="photo.jpg" alt="Фотография именинника" />
+      </div>
+
+      <article class="message-card">
+        <p>Поздравляю тебя с днём рождения!!!🥳🥳🥳🎂
+Ты очень классный, добрый, весёлый, умный и замечательный человек. Я очень рад, что познакомился именно с тобой.</p>
+        <p>
+Хочу пожелать тебе, чтобы все мечты обязательно сбывались, рядом были любимые люди, каждый день был ярче предыдущего, крепкого здоровья, благополучия, счастья, много новых и замечательных моментов, а также счастья в обоих мирах🤍</p>
+        <p>Пусть этот год подарит много красивых моментов, приятных сюрпризов и проводом улыбаться!</p>
+        <strong>Ты заслуживаешь самого прекрасного 💛</strong>
+      </article>
+
+      <div class="cake-area">
+        <div class="cake" id="cake">
+          <div class="candles">
+            <div class="candle"><span class="flame"></span></div>
+            <div class="candle"><span class="flame"></span></div>
+            <div class="candle"><span class="flame"></span></div>
+          </div>
+          <div class="cake-top"></div>
+          <div class="cake-body"><span>♡</span><span>♡</span><span>♡</span></div>
+          <div class="cake-plate"></div>
+        </div>
+        <button class="blow-button" id="blowButton">Задуть свечи</button>
+        <p class="wish" id="wishMessage">Загадай желание и нажми на кнопку</p>
+      </div>
+
+      <button class="music-button" id="musicButton">♫ Включить мелодию</button>
+      <audio id="birthdayMusic" loop preload="auto">
+        <source src="birthday.mp3" type="audio/mpeg" />
+      </audio>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
