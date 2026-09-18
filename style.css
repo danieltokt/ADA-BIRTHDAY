@@ -8,12 +8,20 @@
 
 * { box-sizing: border-box; }
 
+html, body { height: 100%; }
+
 body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
   font-family: Georgia, 'Times New Roman', serif;
   background: radial-gradient(circle at top, #fff 0%, var(--cream) 70%);
+}
+
+/* пока не введена дата — страница не скроллится и не подглядывается снизу */
+body.locked {
+  overflow: hidden;
+  height: 100vh;
 }
 
 main { min-height: 100vh; }
@@ -57,18 +65,28 @@ button {
 form button { width: 100%; margin-top: 15px; color: white; background: var(--dark-pink); }
 button:hover { transform: translateY(-2px); filter: brightness(1.04); }
 .error { min-height: 20px; color: #c75b70; text-align: center; font-size: 14px; }
-.hidden { display: none; }
 
-.birthday-screen { display: flex; flex-direction: column; justify-content: flex-start; text-align: center; padding-top: 56px; }
-.confetti { color: var(--gold); font-size: 22px; letter-spacing: 5px; }
+/* важно: !important — чтобы скрытие экрана поздравления не перебилось другими правилами */
+.hidden { display: none !important; }
+
+.birthday-screen { flex-direction: column; text-align: center; padding-top: 56px; }
+.birthday-screen:not(.hidden) { display: flex; }
+
+/* декоративная строка со звёздочками наверху — статичная, НЕ анимируется */
+.stars-line {
+  color: var(--gold);
+  font-size: 22px;
+  letter-spacing: 5px;
+}
+
 .subtitle { max-width: 520px; margin: 0 auto 25px; }
 .photo-frame {
   width: min(75vw, 290px); height: min(75vw, 290px); padding: 9px; border-radius: 50%;
   background: white; box-shadow: 0 15px 40px rgba(184,111,130,.2); margin: 8px auto 24px;
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.message-card { width: min(100%, 590px); padding: 24px 30px; line-height: 1.7; background: white; border-radius: 24px; box-shadow: 0 12px 35px rgba(184,111,130,.1); }
-.message-card strong { color: var(--dark-pink); font-weight: 400; }
+.message-card { width: min(100%, 590px); padding: 24px 30px; line-height: 1.7; background: white; border-radius: 24px; box-shadow: 0 12px 35px rgba(184,111,130,.1); white-space: pre-line; }
+.message-card strong { color: var(--dark-pink); font-weight: 400; display: block; margin-top: 14px; }
 
 .cake-area { margin-top: 25px; }
 .cake { position: relative; width: 210px; height: 155px; margin: 0 auto 22px; }
@@ -80,34 +98,31 @@ button:hover { transform: translateY(-2px); filter: brightness(1.04); }
 .flame { display: block; width: 14px; height: 21px; margin: -20px 0 0 -1px; border-radius: 50% 50% 50% 0; background: #ffd36e; transform: rotate(-45deg); animation: flicker .8s infinite alternate; }
 .blown .flame { opacity: 0; transform: scale(0); transition: .4s; }
 @keyframes flicker { to { transform: rotate(-45deg) scale(1.12); } }
-.blow-button, .music-button { color: white; background: var(--dark-pink); margin: 4px; }
-.music-button { background: #d8a86d; }
+.blow-button { color: white; background: var(--dark-pink); margin: 4px; }
 .wish { color: #967d83; font-size: 14px; }
+
 .sparkle { position: absolute; color: #e9c777; font-size: 30px; }
-.sparkle-one { top: 16%; left: 14%; }.sparkle-two { right: 14%; bottom: 18%; }
+.sparkle-one { top: 16%; left: 14%; }
+.sparkle-two { right: 14%; bottom: 18%; }
 
 @media (max-width: 500px) {
   .message-card { padding: 20px; }
   .birthday-screen { padding-top: 35px; }
 }
 
-.confetti {
+/* летящее конфетти при задувании свечей — отдельный класс, не пересекается с .stars-line */
+.confetti-piece {
   position: fixed;
   top: -15px;
   width: 9px;
   height: 16px;
   z-index: 20;
   border-radius: 2px;
+  pointer-events: none;
   animation: confetti-fall 3.5s linear forwards;
 }
 
 @keyframes confetti-fall {
-  0% {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(110vh) rotate(720deg);
-  }
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(110vh) rotate(720deg); }
 }
